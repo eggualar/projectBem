@@ -13220,7 +13220,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 6546208788262546035, guid: 4cc40460cf9185d4fb3287295f424a08, type: 3}
-  - {fileID: 6274007655732514741, guid: 426e90b6cd5eb2e40a18468911eca575, type: 3}
 --- !u!4 &1097752400
 Transform:
   m_ObjectHideFlags: 0
@@ -17392,6 +17391,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8fe6648220b8414f800e7b36a9b4703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPoint: []
+  spawnData:
+  - spawnTime: 1
+    spriteType: 0
+    health: 10
+    speed: 1.5
+  - spawnTime: 0.5
+    spriteType: 1
+    health: 15
+    speed: 2.5
 --- !u!4 &1398758974
 Transform:
   m_ObjectHideFlags: 0
@@ -17400,7 +17409,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398758972}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17417,7 +17426,7 @@ Transform:
   - {fileID: 448394777}
   - {fileID: 1040440320}
   - {fileID: 1285358829}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1648192230}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1437257377
 GameObject:
@@ -18039,6 +18048,7 @@ Transform:
   m_Children:
   - {fileID: 632987381}
   - {fileID: 1459809830}
+  - {fileID: 1398758974}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1648192231
@@ -18198,6 +18208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae8e32a063c55647a0966381cd6a77d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameTime: 0
+  maxGameTime: 50
   player: {fileID: 1648192231}
   pool: {fileID: 1097752399}
 --- !u!4 &2074306471
@@ -18224,7 +18236,6 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 2074306471}
   - {fileID: 1097752400}
-  - {fileID: 1398758974}
   - {fileID: 1648192230}
   - {fileID: 1496575732}
   - {fileID: 1560889590}
