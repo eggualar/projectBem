@@ -69,7 +69,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Bullet"))
+        if (!collision.CompareTag("Bullet") || !isLive)
             return;
         health -= collision.GetComponent<Bullet>().damage;
         StartCoroutine(KnockBack()); // 넉백 코루틴 실행
@@ -85,6 +85,9 @@ public class Enemy : MonoBehaviour
             rigid.simulated = false;    // 물리 시뮬 비활성
             spriter.sortingOrder = 1;   // 레이어 한 단계 내리기
             anim.SetBool("Dead", true);
+            //애니메이션이 Dead함수 실행
+            GameManager.instance.kill++;    // 킬 수 증가
+            GameManager.instance.GetExp();  // 경험치 증가 (임시) --> 킬 시 경험치 구슬 떨구고 그거 획득시 경험치 증가로 바꿀 예정
         }
     }
 
