@@ -15,12 +15,7 @@ public class Weapon : MonoBehaviour
 
     private void Awake()
     {
-        player = GetComponentInParent<Player>();
-    }
-
-    private void Start()
-    {
-        Init();
+        player = GameManager.instance.player;
     }
 
     private void Update()
@@ -49,20 +44,47 @@ public class Weapon : MonoBehaviour
 
         if (id == 0)
             Batch();
+
+        // 특정 함수 호출(ApplyGear)을 모든 자식에게 적용(패시브를 모든 무기에 적용)
+        //player.BroadcastMessage("ApplyGear");
+        player.BroadcastMessage("ApplyGear",SendMessageOptions.DontRequireReceiver); //전달할 개체가 없는 경우 오류 콘솔 전달하지 않음
     }
 
-    public void Init()
+    public void Init(ItemData data)
     {
+        //Basic Set
+        name = "Weapon" + data.itemId;
+        transform.parent = player.transform;  //부모 오브젝트를 플레이어로 지정
+        transform.localPosition = Vector3.zero; // 위치 설정
+
+        //Property Set
+        // 각 무기 속성변수들을 스크립트블 오브젝트 데이터로 초기화
+        id = data.itemId;
+        damage = data.baseDamage;
+        count = data.baseCount;
+
+        for (int index=0; index < GameManager.instance.pool.prefabs.Length; index++)
+        {
+            if(data.projectile == GameManager.instance.pool.prefabs[index])
+            {
+                prefabId = index;
+                break;
+            }
+        }
+
         switch (id)
         {
             case 0:
-                speed = -150;
+                speed = 150;
                 Batch();
                 break;
             default:
                 speed = 0.3f;
                 break;
         }
+
+        // 특정 함수 호출(ApplyGear)을 모든 자식에게 적용(패시브를 모든 무기에 적용)
+        player.BroadcastMessage("ApplyGear",SendMessageOptions.DontRequireReceiver);
     }
 
     void Batch() //생성된 무기를 배치하는 함수
