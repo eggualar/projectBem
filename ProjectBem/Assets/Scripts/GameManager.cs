@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     [Header("# Game Control")]
     public bool isLive; //레벨업 시 시간 컨트롤
     public float gameTime;
-    public float maxGameTime = 5 * 10f;
+    public float maxGameTime = 2 * 10f;
     [Header("# Player Info")]
     public int playerId;
     public float health;
@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
     public void GameVictory()
     {
         StartCoroutine(GameVictoryRoutine());
+        PlayerPrefs.SetInt("SavePerk", 1);   // 퍽 증가하는지 확인
     }
 
     IEnumerator GameVictoryRoutine()
@@ -77,7 +78,7 @@ public class GameManager : MonoBehaviour
 
     public void GameRetry()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     private void Update()
