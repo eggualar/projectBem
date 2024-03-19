@@ -19,6 +19,9 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.instance.isLive)
+            return;
+
         timer += Time.deltaTime;
         level = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / upLevel),spawnData.Length-1); //FloorToInt(아랫자리 내림 후 float을 Int로 변경) / Mathf.Min(스폰 레벨이 정한거 이상 올라가지 않게)
 
