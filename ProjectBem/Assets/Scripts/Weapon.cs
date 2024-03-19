@@ -132,6 +132,5 @@ public class Weapon : MonoBehaviour
         bullet.position = transform.position;   // 쏘는 시작 위치 설정
         bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
         bullet.GetComponent<Bullet>().Init(damage, count, dir); //원거리 공격에 맞는 초기화 함수 호출
-
     }
 }
