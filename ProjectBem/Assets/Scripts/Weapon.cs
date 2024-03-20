@@ -42,7 +42,7 @@ public class Weapon : MonoBehaviour
 
     public void LevelUp(float damage, int count)
     {
-        this.damage = damage*Character.Damage;
+        this.damage = damage*Character.Damage* (1 + PlayerPrefs.GetFloat("BaseDmg"));
         this.count += count;
 
         if (id == 0)
@@ -63,7 +63,7 @@ public class Weapon : MonoBehaviour
         //Property Set
         // 각 무기 속성변수들을 스크립트블 오브젝트 데이터로 초기화
         id = data.itemId;
-        damage = data.baseDamage*Character.Damage;
+        damage = data.baseDamage*Character.Damage*(1+PlayerPrefs.GetFloat("BaseDmg")); //여기에 베이스 데미지 더한다.
         count = data.baseCount+Character.Count;
 
         for (int index=0; index < GameManager.instance.pool.prefabs.Length; index++)

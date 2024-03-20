@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
-    public enum InfoType { Exp, Level, Kill, Time, Health, Perk } // 열거형
+    public enum InfoType { Exp, Level, Kill, Time, Health } // 열거형
     public InfoType type;
 
     Text myText;
@@ -42,10 +42,6 @@ public class HUD : MonoBehaviour
                 float curHealth = GameManager.instance.health;
                 float maxHealth = GameManager.instance.maxHealth;
                 mySlider.value = curHealth / maxHealth;
-                break;
-            case InfoType.Perk:
-                int curPerk = SaveData.instance.perk;
-                myText.text = string.Format("특성포인트: {0:F0}", curPerk);
                 break;
         }
     }

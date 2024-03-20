@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public void GameStart(int id)
     {
         playerId = id;
+        maxHealth += PlayerPrefs.GetFloat("BaseMHp");
         health = maxHealth;
 
         player.gameObject.SetActive(true);

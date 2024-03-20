@@ -9,9 +9,11 @@ public class SaveData : MonoBehaviour
     public static SaveData instance;
     [HideInInspector]
     public int perk;
-    public float baseDamage;
-    public float baseSpeed;
-    public float baseMaxHp;
+    [SerializeField]
+    public float baseDmg;
+    public float baseSpd;
+    public float baseMHp;
+    public int needPerk;
 
     private void Awake()
     {
@@ -22,7 +24,7 @@ public class SaveData : MonoBehaviour
     {
         // 확인용
         // PlayerPrefs.SetInt("SavePerk", 1);
-        perk = perk + PlayerPrefs.GetInt("SavePerk");
+        perk += PlayerPrefs.GetInt("SavePerk");
     }
 
     public void Reset()
@@ -46,15 +48,27 @@ public class SaveData : MonoBehaviour
     // 퍽 업그레이드 함수들
     public void BaseDmgUpg()
     {
-
+        //Weapon스크립트
+        if (perk <= 0)
+            return;
+        PlayerPrefs.SetFloat("BaseDmg", PlayerPrefs.GetFloat("BaseDmg")+ baseDmg);
+        perk -= needPerk;
     }
 
     public void BaseSpdUpg()
     {
-
+        //Gear스크립트, Player스크립트
+        if (perk <= 0)
+            return;
+        PlayerPrefs.SetFloat("BaseSpd", PlayerPrefs.GetFloat("BaseSpd") + baseSpd);
+        perk -= needPerk;
     }
     public void BaseMHpUpg()
     {
-
+        //GameManager스크립트
+        if (perk <= 0)
+            return;
+        PlayerPrefs.SetFloat("BaseMHp", PlayerPrefs.GetFloat("BaseMHp") + baseMHp);
+        perk -= needPerk;
     }
 }
