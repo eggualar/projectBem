@@ -28,6 +28,16 @@ public class Weapon : MonoBehaviour
             case 0:
                 transform.Rotate(Vector3.back * speed * Time.deltaTime); //update에서는 deltaTime
                 break;
+            case 5:
+                timer += Time.deltaTime;
+
+                if (timer > speed)
+                {
+                    timer = 0f;
+                    ViewFire();
+                }
+                break;
+
             default:
                 timer += Time.deltaTime;
                 if(timer> speed)
@@ -132,5 +142,16 @@ public class Weapon : MonoBehaviour
         bullet.position = transform.position;   // 쏘는 시작 위치 설정
         bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
         bullet.GetComponent<Bullet>().Init(damage, count, dir); //원거리 공격에 맞는 초기화 함수 호출
+    }
+
+    void ViewFire()
+    {
+        Vector3 targetPos = transform.position; // ----> 타겟은 바라보는 방향
+        targetPos.Normalize(); //총알 발사속도의 정규화
+        Transform bullet = GameManager.instance.pool.Get(prefabId).transform; // 총알 프리펩 접근
+
+        bullet.GetComponent<Bullet>().Init(damage, count, targetPos);
+
+        bullet.position = transform.position;//총알이 내 중심으로 소환되게 만드는 변수
     }
 }
