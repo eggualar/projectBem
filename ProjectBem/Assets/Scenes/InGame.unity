@@ -15730,7 +15730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07b1379bcf74f3249a5289403b1d4aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 2522e9a28259d134182610e54c84148e, type: 2}
+  data: {fileID: 11400000, guid: f7a3fabccec8214409e5024b27cd9e5f, type: 2}
   level: 0
   weapon: {fileID: 0}
   gear: {fileID: 0}
