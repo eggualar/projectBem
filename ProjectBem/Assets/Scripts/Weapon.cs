@@ -13,9 +13,16 @@ public class Weapon : MonoBehaviour
     float timer;
     Player player;
 
+    Vector3 dir;
+    bool dirB;
+    Vector3 dirSv;
+    Vector3 tgPos;
+
     private void Awake()
     {
         player = GameManager.instance.player;
+        dir = transform.position;
+        dirB = false;
     }
 
     private void Update()
@@ -48,6 +55,14 @@ public class Weapon : MonoBehaviour
                 break;
         }
 
+    }
+
+    private void FixedUpdate()
+    {
+        if (dirB == false && dir != transform.position)
+            StartCoroutine(Dir());
+        else
+            return;
     }
 
     public void LevelUp(float damage, int count)
@@ -134,8 +149,8 @@ public class Weapon : MonoBehaviour
 
         //총알이 나가는 방향 계산
         Vector3 targetPos = player.scanner.nearestTarget.position;
-        Vector3 dir = targetPos - transform.position;
-        dir = dir.normalized;
+        Vector3 dir = targetPos - transform.position;   // dir: 타겟과 자신의 거리
+        dir = dir.normalized;                           // normalized는 대각선과 직선의 거리를 같게 계산하도록 하는 식
 
         // Bullet스크립트에 위치와 회전값 전달
         Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
@@ -146,12 +161,22 @@ public class Weapon : MonoBehaviour
 
     void ViewFire()
     {
-        Vector3 targetPos = transform.position; // ----> 타겟은 바라보는 방향
-        targetPos.Normalize(); //총알 발사속도의 정규화
-        Transform bullet = GameManager.instance.pool.Get(prefabId).transform; // 총알 프리펩 접근
+            Vector3 targetPos = transform.position; // ----> 타겟은 바라보는 방향
+            Vector3 dir = targetPos - this.dir;
 
-        bullet.GetComponent<Bullet>().Init(damage, count, targetPos);
-
-        bullet.position = transform.position;//총알이 내 중심으로 소환되게 만드는 변수
+            dir = dir.normalized;
+            Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
+            bullet.position = transform.position;   // 쏘는 시작 위치 설정
+            bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+            bullet.GetComponent<Bullet>().Init(damage, count, dir); //원거리 공격에 맞는 초기화 함수 호출
     }
+
+    IEnumerator Dir()
+    {
+        dirB = true;
+        dir = transform.position;
+        yield return 0.02f;
+        dirB = false;
+    }
+
 }

@@ -24,13 +24,18 @@ public class SaveData : MonoBehaviour
     {
         // 확인용
         // PlayerPrefs.SetInt("SavePerk", 1);
-        perk += PlayerPrefs.GetInt("SavePerk");
+        PlayerPrefs.SetInt("SavePerk", PlayerPrefs.GetInt("SavePerk")+PlayerPrefs.GetInt("GainPerk"));  //GameManager에서 적용한 퍽을 저장소에 더함
+        perk = PlayerPrefs.GetInt("SavePerk");
+        print($"SavePerk: {PlayerPrefs.GetInt("SavePerk")}");
+        print($"GainPerk: {PlayerPrefs.GetInt("GainPerk")}");
+        print($"Perk: {perk}");
     }
 
     public void Reset()
     {
         //퍽 개수 초기화
         PlayerPrefs.SetInt("SavePerk", 0);
+        PlayerPrefs.SetInt("GainPerk", 0);
         perk = 0;
 
         //퍽 업글 초기화
@@ -53,6 +58,7 @@ public class SaveData : MonoBehaviour
             return;
         PlayerPrefs.SetFloat("BaseDmg", PlayerPrefs.GetFloat("BaseDmg")+ baseDmg);
         perk -= needPerk;
+        PlayerPrefs.SetInt("SavePerk", perk);
     }
 
     public void BaseSpdUpg()
@@ -62,6 +68,7 @@ public class SaveData : MonoBehaviour
             return;
         PlayerPrefs.SetFloat("BaseSpd", PlayerPrefs.GetFloat("BaseSpd") + baseSpd);
         perk -= needPerk;
+        PlayerPrefs.SetInt("SavePerk", perk);
     }
     public void BaseMHpUpg()
     {
@@ -70,5 +77,6 @@ public class SaveData : MonoBehaviour
             return;
         PlayerPrefs.SetFloat("BaseMHp", PlayerPrefs.GetFloat("BaseMHp") + baseMHp);
         perk -= needPerk;
+        PlayerPrefs.SetInt("SavePerk", perk);
     }
 }

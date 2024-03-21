@@ -56,13 +56,14 @@ public class GameManager : MonoBehaviour
 
         uiResult.gameObject.SetActive(true);
         uiResult.Lose();
+        PlayerPrefs.SetInt("GainPerk", 0);   // 퍽 증가하는지 확인
         Stop();
     }
 
     public void GameVictory()
     {
         StartCoroutine(GameVictoryRoutine());
-        PlayerPrefs.SetInt("SavePerk", 1);   // 퍽 증가하는지 확인
+        PlayerPrefs.SetInt("GainPerk", 1);   // 퍽 증가하는지 확인
     }
 
     IEnumerator GameVictoryRoutine()
