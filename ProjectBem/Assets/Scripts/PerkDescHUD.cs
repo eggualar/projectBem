@@ -32,10 +32,8 @@ public class PerkDescHUD : MonoBehaviour
                 break;
 
             case InfoType.BaseMHp:
-                myText.text = string.Format($"최대체력 + {SaveData.instance.baseMHp} \n 현재: {PlayerPrefs.GetFloat("BaseMHp") * 100}% \n 가격: {SaveData.instance.needPerk}");
+                myText.text = string.Format($"최대체력 + {SaveData.instance.baseMHp} \n 현재: {10+PlayerPrefs.GetFloat("BaseMHp")} \n 가격: {SaveData.instance.needPerk}");
                 break;
-
-
         }
     }
 }
