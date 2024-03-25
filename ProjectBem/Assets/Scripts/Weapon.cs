@@ -13,16 +13,9 @@ public class Weapon : MonoBehaviour
     float timer;
     Player player;
 
-    Vector3 dir;
-    bool dirB;
-    Vector3 dirSv;
-    Vector3 tgPos;
-
     private void Awake()
     {
         player = GameManager.instance.player;
-        dir = transform.position;
-        dirB = false;
     }
 
     private void Update()
@@ -55,14 +48,6 @@ public class Weapon : MonoBehaviour
                 break;
         }
 
-    }
-
-    private void FixedUpdate()
-    {
-        if (dirB == false && dir != transform.position)
-            StartCoroutine(Dir());
-        else
-            return;
     }
 
     public void LevelUp(float damage, int count)
@@ -161,22 +146,15 @@ public class Weapon : MonoBehaviour
 
     void ViewFire()
     {
-            Vector3 targetPos = transform.position; // ----> 타겟은 바라보는 방향
-            Vector3 dir = targetPos - this.dir;
+        Vector3 targetPos = GameManager.instance.pRDot.transform.position; // ----> 타겟은 바라보는 방향
+        Vector3 dir = targetPos - transform.position;
+        dir = dir.normalized;
 
-            dir = dir.normalized;
-            Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
-            bullet.position = transform.position;   // 쏘는 시작 위치 설정
-            bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
-            bullet.GetComponent<Bullet>().Init(damage, count, dir); //원거리 공격에 맞는 초기화 함수 호출
+        Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
+        bullet.position = transform.position;   // 쏘는 시작 위치 설정
+        bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+        bullet.GetComponent<Bullet>().Init(damage, count, dir); //원거리 공격에 맞는 초기화 함수 호출
     }
 
-    IEnumerator Dir()
-    {
-        dirB = true;
-        dir = transform.position;
-        yield return 0.02f;
-        dirB = false;
-    }
 
 }

@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public LevelUp uiLevelUp;
     public Result uiResult;
     public GameObject enemyCleaner;
+    public GameObject pRDot;
 
     private void Awake()
     {

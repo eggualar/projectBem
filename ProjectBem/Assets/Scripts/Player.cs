@@ -30,9 +30,6 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!GameManager.instance.isLive)
-            return;
-
         Vector2 nextVec = inputVec.normalized * speed * Time.fixedDeltaTime;
         //normalized : 피타고라스 정리에 의해 대각선 방향도 같은 속도로 이동하게 함
         //Time.fixedDeltaTime : 물리 프레임 속도만큼
