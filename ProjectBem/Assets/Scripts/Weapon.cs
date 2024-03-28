@@ -28,9 +28,9 @@ public class Weapon : MonoBehaviour
             case 0:
                 transform.Rotate(Vector3.back * speed * Time.deltaTime); //update¿¡¼­´Â deltaTime
                 break;
+
             case 5:
                 timer += Time.deltaTime;
-
                 if (timer > speed)
                 {
                     timer = 0f;
