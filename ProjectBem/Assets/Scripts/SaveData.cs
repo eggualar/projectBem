@@ -9,6 +9,7 @@ public class SaveData : MonoBehaviour
     public static SaveData instance;
     [HideInInspector]
     public int perk;
+    public int gem;
     [SerializeField]
     public float baseDmg;
     public float baseSpd;
@@ -22,10 +23,17 @@ public class SaveData : MonoBehaviour
 
     private void Start()
     {
-        // 확인용
-        // PlayerPrefs.SetInt("SavePerk", 1);
+        //확인용
+        PlayerPrefs.SetInt("GainGem", 100);
+        //
+
         PlayerPrefs.SetInt("SavePerk", PlayerPrefs.GetInt("SavePerk")+PlayerPrefs.GetInt("GainPerk"));  //GameManager에서 적용한 퍽을 저장소에 더함
         perk = PlayerPrefs.GetInt("SavePerk");
+
+        PlayerPrefs.SetInt("SaveGem", PlayerPrefs.GetInt("SaveGem") + PlayerPrefs.GetInt("GainGem"));  //GameManager에서 적용한 퍽을 저장소에 더함
+        gem = PlayerPrefs.GetInt("SaveGem");
+
+        // 확인용
         print($"SavePerk: {PlayerPrefs.GetInt("SavePerk")}");
         print($"GainPerk: {PlayerPrefs.GetInt("GainPerk")}");
         print($"Perk: {perk}");
@@ -42,6 +50,11 @@ public class SaveData : MonoBehaviour
         PlayerPrefs.SetFloat("BaseDmg", 0);
         PlayerPrefs.SetFloat("BaseSpd", 0);
         PlayerPrefs.SetFloat("BaseMHp", 0);
+
+        //젬 개수 초기화
+        PlayerPrefs.SetInt("SaveGem", 0);
+        PlayerPrefs.SetInt("GainGem", 0);
+        gem = 0;
     }
 
     public void GameStart()
@@ -78,5 +91,13 @@ public class SaveData : MonoBehaviour
         PlayerPrefs.SetFloat("BaseMHp", PlayerPrefs.GetFloat("BaseMHp") + baseMHp);
         perk -= needPerk;
         PlayerPrefs.SetInt("SavePerk", perk);
+    }
+
+    //임시 젬 획득 버튼
+    public void GetGem()
+    {
+        PlayerPrefs.SetInt("GainGem", 10);
+        PlayerPrefs.SetInt("SaveGem", PlayerPrefs.GetInt("SaveGem") + PlayerPrefs.GetInt("GainGem"));
+        gem = PlayerPrefs.GetInt("SaveGem");
     }
 }
