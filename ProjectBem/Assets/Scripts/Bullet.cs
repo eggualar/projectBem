@@ -19,9 +19,9 @@ public class Bullet : MonoBehaviour
         this.damage = damage;
         this.per = per;
 
-        if(per>-1) // 관통이 -1(무한)보다 큰 것에 대해서는 속도 적용(원거리 무기, 총알)
+        if(per > -1) // 관통이 -1(무한)보다 큰 것에 대해서는 속도 적용(원거리 무기, 총알)
         {
-            rigid.velocity = dir*15f; //속력 임시설정
+            rigid.velocity = dir * 15f; //속력 임시설정
         }
     }
 
