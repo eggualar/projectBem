@@ -24,7 +24,7 @@ public class Pet : MonoBehaviour
 
     private void OnEnable()
     {
-        speed *= Character.Speed * (1 + PlayerPrefs.GetFloat("BaseSpd"));
+        speed *= 1 + PlayerPrefs.GetFloat("BaseSpd");
         anim.runtimeAnimatorController = animCon[GameManager.instance.playerId];
     }
 

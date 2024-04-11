@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
+    private void Start()
+    {
+        GameStart(0);
+    }
+
     public void GameStart(int id)
     {
         playerId = id;

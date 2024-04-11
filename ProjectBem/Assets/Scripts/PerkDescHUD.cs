@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PerkDescHUD : MonoBehaviour
 {
-    public enum InfoType { Perk, BaseDmg, BaseSpd, BaseMHp, Gacha1, Gacha10 } // 열거형
+    public enum InfoType { Perk, BaseDmg, BaseSpd, BaseMHp } // 열거형
     public InfoType type;
     Text myText;
 
@@ -33,12 +33,6 @@ public class PerkDescHUD : MonoBehaviour
 
             case InfoType.BaseMHp:
                 myText.text = string.Format($"최대체력 + {SaveData.instance.baseMHp} \n 현재: {10+PlayerPrefs.GetFloat("BaseMHp")} \n 가격: {SaveData.instance.needPerk}");
-                break;
-            case InfoType.Gacha1:
-                myText.text = string.Format($"1회 뽑기\n{SaveData.instance.gem}/1");
-                break;
-            case InfoType.Gacha10:
-                myText.text = string.Format($"10회 뽑기\n{SaveData.instance.gem}/10");
                 break;
         }
     }

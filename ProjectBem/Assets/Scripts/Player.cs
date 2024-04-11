@@ -24,8 +24,8 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        speed *= Character.Speed*(1 + PlayerPrefs.GetFloat("BaseSpd"));
-        anim.runtimeAnimatorController = animCon[GameManager.instance.playerId];
+        speed *= 1 + PlayerPrefs.GetFloat("BaseSpd");
+        anim.runtimeAnimatorController = animCon[0];
     }
 
     private void FixedUpdate()

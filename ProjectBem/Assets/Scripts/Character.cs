@@ -6,10 +6,11 @@ public class Character : MonoBehaviour
 {
     // 다른 스크립트에서 Character.Speed로 참조할 수 있음
     // 예) 이동속도 1.1배인 경우, 이동속도 = N*Character.Speed;
+    /*
     public static float Speed
     {
         get { return GameManager.instance.playerId == 0? 1.1f : 1f; }
-    }
+    }*/
     public static float WeaponSpeed
     {
         get { return GameManager.instance.playerId == 1 ? 1.1f : 1f; }
